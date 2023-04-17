@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getChannelFromChannelName } from '../slack'
+import { getChannelFromChannelName, sendMessageToChannel } from '../slack'
 
 const routes = Router()
 
@@ -18,6 +18,18 @@ routes.get('/validChannel/:channelName', async (req, res, next) => {
             res.sendStatus(404);
         }
     } catch(error) {
+        res.sendStatus(500)
+    }
+})
+
+routes.post('/message/:channelId', async (req, res, next) => {
+    try {
+        await sendMessageToChannel({
+            channelId: req.params.channelId,
+            ...req.body
+        })
+        res.sendStatus(200)
+    } catch (error) {
         res.sendStatus(500)
     }
 })

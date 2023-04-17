@@ -2,7 +2,8 @@ import dotenv from 'dotenv'
 import { App } from '@slack/bolt'
 import { slackApp } from '../loaders'
 import config from '../config'
-import { ISlackChannel } from '../types'
+import { ISlackChannel, ISlackMessage } from '../types'
+import { generateMessageBlocks } from './message'
 
 export const getChannelFromChannelName = async (channelName: string, cursor: string): Promise<ISlackChannel | undefined> => {
     const conversations = await slackApp.client.conversations.list({ token: config.slack.botToken, limit: 1000, cursor })
@@ -24,8 +25,12 @@ export const getChannelFromChannelName = async (channelName: string, cursor: str
     }
 }
 
-// await app.client.chat.postMessage({
-//             token: process.env.SLACK_BOT_TOKEN,
-//             channel: channel.id!,
-//             text: 'Ditt samtykke for: Brukertest av Los Pollos Hermanos. Har utløpt'
-//         })
+export const sendMessageToChannel = async (message: ISlackMessage) => {
+    // If something is wrong with the "block", post message will default to "text"
+    await slackApp.client.chat.postMessage({
+        token: config.slack.botToken,
+        channel: message.channelId,
+        text: 'Noe gikk galt i byggingen av meldingen, vennligst kontakt #researchops',
+        blocks: generateMessageBlocks(message)
+    })
+}
