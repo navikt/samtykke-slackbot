@@ -11,21 +11,15 @@ routes.get('/isready', async (req, res, next) => {
 })
 
 routes.get('/validChannel/:channelName', async (req, res, next) => {
-    console.log(req.params.channelName)
-    const channel = await getChannelFromChannelName(req.params.channelName, '')
-
-    console.log(channel)
-    // try {
-    //     if (await getChannelFromChannelName(req.params.channelName, '')) {
-    //         res.sendStatus(200);
-    //     } else {
-    //         res.sendStatus(404);
-    //     }
-    // } catch(error) {
-    //     res.sendStatus(500)
-    // }
-
-    res.sendStatus(200)
+    try {
+        if (await getChannelFromChannelName(req.params.channelName, '')) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(404);
+        }
+    } catch(error) {
+        res.sendStatus(500)
+    }
 })
 
 export default Router().use(routes)
