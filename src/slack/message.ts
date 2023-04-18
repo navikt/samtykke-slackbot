@@ -44,7 +44,7 @@ export const generateMessageBlocks = (message: ISlackMessage) => {
                 type: 'section',
                 text: {
                     type: 'mrkdwn',
-                    text: `En innbygger med løpenummer: *${message.trackingNumbers![0].split("-")}* har trukket sitt samtykke til: ${message.consentTitle}. Nå må du slette all ekstern data knyttet til innbyggeren.`
+                    text: `En innbygger med løpenummer: *${message.trackingNumbers![0].split("-")[0].toUpperCase()}* har trukket sitt samtykke til: ${message.consentTitle}. Nå må du slette all ekstern data knyttet til innbyggeren.`
                 },
                 fields: [
                     {
@@ -69,7 +69,7 @@ export const generateMessageBlocks = (message: ISlackMessage) => {
                 type: 'section',
                 text: {
                     type: 'mrkdwn',
-                    text: `En innbygger med løpenummer: *${message.trackingNumbers![0].split("-")}* har redigert sitt samtykke til: ${message.consentTitle}. Nå må du oppdatere all ekstern data knyttet til innbyggeren.`
+                    text: `En innbygger med løpenummer: *${message.trackingNumbers![0].split("-")[0].toUpperCase()}* har redigert sitt samtykke til: ${message.consentTitle}. Nå må du oppdatere all ekstern data knyttet til innbyggeren.`
                 },
                 fields: [
                     {
@@ -108,9 +108,9 @@ const formatTrackingNumbers = (trackingNumbers: Array<string>) => {
 
     trackingNumbers.map((trackingNumber: string, index: number) => {
         if (index === trackingNumbers.length - 1) {
-            formattedTrackingNumbers = formattedTrackingNumbers.concat(trackingNumber.split("-")[0])
+            formattedTrackingNumbers = formattedTrackingNumbers.concat(trackingNumber.split("-")[0].toUpperCase())
         } else {
-            formattedTrackingNumbers = formattedTrackingNumbers.concat(`${trackingNumber.split("-")[0]}, `)
+            formattedTrackingNumbers = formattedTrackingNumbers.concat(`${trackingNumber.split("-")[0].toUpperCase()}, `)
         }
     })
     return formattedTrackingNumbers
