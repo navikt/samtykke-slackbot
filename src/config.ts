@@ -9,5 +9,8 @@ export default {
     slack: {
         botToken: process.env.SLACK_BOT_TOKEN,
         signingSecret: process.env.SLACK_SIGNING_SECRET
+    },
+    nais: {
+        cluster: process.env.NAIS_CLUSTER_NAME
     }
 }
