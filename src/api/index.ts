@@ -12,8 +12,11 @@ routes.get('/isready', async (req, res, next) => {
 
 routes.get('/validChannel/:channelName', async (req, res, next) => {
     try {
-        if (await getChannelFromChannelName(req.params.channelName, '')) {
-            res.sendStatus(200);
+        const channel = await getChannelFromChannelName(req.params.channelName, '') 
+        if (channel) {
+            res.status(200).json({
+                slackChannelId: channel.id
+            });
         } else {
             res.sendStatus(404);
         }

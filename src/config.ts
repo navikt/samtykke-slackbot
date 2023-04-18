@@ -4,7 +4,7 @@ dotenv.config()
 
 export default {
     http: {
-        port: process.env.HTTP_PORT || 8080 
+        port: process.env.HTTP_PORT || 8081
     },
     slack: {
         botToken: process.env.SLACK_BOT_TOKEN,
