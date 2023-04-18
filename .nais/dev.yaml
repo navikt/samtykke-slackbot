@@ -41,10 +41,6 @@ spec:
     - secret: slackbot-secret
   accessPolicy:
     inbound:
-      external:
-        - host: slack.com
-        - host: api.slack.com
-        - host: https://slack.com
       rules:
         - application: samtykke-employee
         - application: samtykke-api
@@ -52,5 +48,4 @@ spec:
       external:
         - host: slack.com
         - host: api.slack.com
-        - host: https://slack.com
 
