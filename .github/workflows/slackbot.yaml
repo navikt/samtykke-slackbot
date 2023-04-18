@@ -1,6 +1,7 @@
 name: Test and Deploy slackbot
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 
