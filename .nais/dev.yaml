@@ -42,11 +42,13 @@ spec:
   accessPolicy:
     inbound:
       external:
-        - host: https://slack.com
+        - host: slack.com
+        - host: api.slack.com
       rules:
         - application: samtykke-employee
         - application: samtykke-api
     outbound:
       external:
-        - host: https://slack.com
+        - host: slack.com
+        - host: api.slack.com
 
