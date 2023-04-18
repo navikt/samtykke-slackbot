@@ -5,6 +5,7 @@ import config from '../config'
 import { ISlackChannel, ISlackMessage } from '../types'
 import { generateMessageBlocks } from './message'
 
+// Recursive function for finding slack channel by name
 export const getChannelFromChannelName = async (channelName: string, cursor: string): Promise<ISlackChannel | undefined> => {
     const conversations = await slackApp.client.conversations.list({ token: config.slack.botToken, limit: 1000, cursor })
     
