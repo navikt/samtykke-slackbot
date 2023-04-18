@@ -35,10 +35,10 @@ spec:
       allowAllUsers: true
       tenant: nav.no
   filesFrom:
-    - secret: slackbot-secrets
-      mountPath: /var/run/secrets/slackbot-secrets
+    - secret: slackbot-secret
+      mountPath: /var/run/secrets/slackbot-secret
   envFrom:
-    - secret: slackbot-secrets
+    - secret: slackbot-secret
   accessPolicy:
     inbound:
       external:
