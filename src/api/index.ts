@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import config from '../config'
 import { getChannelFromChannelName, sendMessageToChannel } from '../slack'
+import { authAzureToken } from './auth/authenticationMiddleware'
 
 const routes = Router()
 
@@ -12,8 +13,7 @@ routes.get('/isready', async (req, res, next) => {
 })
 
 if (config.nais.cluster === 'dev-gcp' || config.nais.cluster === 'prod-gcp') {
-    // TODO: Add authentication handling as
-    routes.get('/validChannel/:channelName', async (req, res, next) => {
+    routes.get('/validChannel/:channelName', authAzureToken, async (req, res, next) => {
         try {
             const channel = await getChannelFromChannelName(req.params.channelName, '') 
             if (channel) {
@@ -28,7 +28,7 @@ if (config.nais.cluster === 'dev-gcp' || config.nais.cluster === 'prod-gcp') {
         }
     })
 
-    routes.post('/message/:channelId', async (req, res, next) => {
+    routes.post('/message/:channelId', authAzureToken, async (req, res, next) => {
         try {
             await sendMessageToChannel({
                 channelId: req.params.channelId,
