@@ -18,7 +18,8 @@ if (config.nais.cluster === 'dev-gcp' || config.nais.cluster === 'prod-gcp') {
             const channel = await getChannelFromChannelName(req.params.channelName, '') 
             if (channel) {
                 res.status(200).json({
-                    slackChannelId: channel.id
+                    slackChannelId: channel.id,
+                    sizeWarning: channel.sizeWarning
                 });
             } else {
                 res.sendStatus(404);
@@ -45,7 +46,8 @@ if (config.nais.cluster === 'dev-gcp' || config.nais.cluster === 'prod-gcp') {
             const channel = await getChannelFromChannelName(req.params.channelName, '') 
             if (channel) {
                 res.status(200).json({
-                    slackChannelId: channel.id
+                    slackChannelId: channel.id,
+                    sizeWarning: channel.sizeWarning
                 });
             } else {
                 res.sendStatus(404);

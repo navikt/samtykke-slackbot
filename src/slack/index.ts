@@ -1,9 +1,9 @@
-import dotenv from 'dotenv'
-import { App } from '@slack/bolt'
 import { slackApp } from '../loaders'
 import config from '../config'
 import { ISlackChannel, ISlackMessage } from '../types'
 import { generateMessageBlocks } from './message'
+
+const sizeWarningLimit: Number = 20
 
 // Recursive function for finding slack channel by name
 export const getChannelFromChannelName = async (channelName: string, cursor: string): Promise<ISlackChannel | undefined> => {
@@ -19,7 +19,8 @@ export const getChannelFromChannelName = async (channelName: string, cursor: str
         return {
             id: channel.id!,
             name: channel.name!,
-            isPrivate: channel.is_private!
+            isPrivate: channel.is_private!,
+            sizeWarning: channel.num_members! > sizeWarningLimit as boolean
         }
     } else {
         return undefined
