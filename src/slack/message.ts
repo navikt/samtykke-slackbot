@@ -44,7 +44,7 @@ export const generateMessageBlocks = (message: ISlackMessage) => {
                 type: 'section',
                 text: {
                     type: 'mrkdwn',
-                    text: `En innbygger med løpenummer: *${message.trackingNumbers![0].split("-")[0].toUpperCase()}* har trukket sitt samtykke til: ${message.consentTitle}. Nå må du slette all ekstern data knyttet til innbyggeren.`
+                    text: `En innbygger med løpenummer: *${message.trackingNumbers![0].toUpperCase()}* har trukket sitt samtykke til: ${message.consentTitle}. Nå må du slette all ekstern data knyttet til innbyggeren.`
                 },
                 fields: [
                     {
@@ -69,7 +69,7 @@ export const generateMessageBlocks = (message: ISlackMessage) => {
                 type: 'section',
                 text: {
                     type: 'mrkdwn',
-                    text: `En innbygger med løpenummer: *${message.trackingNumbers![0].split("-")[0].toUpperCase()}* har redigert sitt samtykke til: ${message.consentTitle}. Nå må du oppdatere all ekstern data knyttet til innbyggeren.`
+                    text: `En innbygger med løpenummer: *${message.trackingNumbers![0].toUpperCase()}* har redigert sitt samtykke til: ${message.consentTitle}. Nå må du oppdatere all ekstern data knyttet til innbyggeren.`
                 },
                 fields: [
                     {
@@ -94,7 +94,9 @@ export const generateMessageBlocks = (message: ISlackMessage) => {
                 type: 'section',
                 text: {
                     type: 'mrkdwn',
-                    text: `Ditt samtykke: ${message.consentTitle} har utløpt, og disse løpenummerene er knyttet til samtykket: *${formatTrackingNumbers(message.trackingNumbers!)}*. Nå må du slette all ekstern data knyttet til innbyggerne`
+                    text: message.trackingNumbers!.length > 0
+                        ? `Ditt samtykke: ${message.consentTitle} har utløpt, og disse løpenummerene er knyttet til samtykket: *${formatTrackingNumbers(message.trackingNumbers!)}*. Nå må du slette all ekstern data knyttet til innbyggerne`
+                        : `Ditt samtykke: ${message.consentTitle} har utløpt, men det er ingen innbyggere knyttet til samtykket`
                 }
             })
             break 
@@ -108,9 +110,9 @@ const formatTrackingNumbers = (trackingNumbers: Array<string>) => {
 
     trackingNumbers.map((trackingNumber: string, index: number) => {
         if (index === trackingNumbers.length - 1) {
-            formattedTrackingNumbers = formattedTrackingNumbers.concat(trackingNumber.split("-")[0].toUpperCase())
+            formattedTrackingNumbers = formattedTrackingNumbers.concat(trackingNumber.toUpperCase())
         } else {
-            formattedTrackingNumbers = formattedTrackingNumbers.concat(`${trackingNumber.split("-")[0].toUpperCase()}, `)
+            formattedTrackingNumbers = formattedTrackingNumbers.concat(`${trackingNumber.toUpperCase()}, `)
         }
     })
     return formattedTrackingNumbers

@@ -3,7 +3,7 @@ import config from '../config'
 import { ISlackChannel, ISlackMessage } from '../types'
 import { generateMessageBlocks } from './message'
 
-const sizeWarningLimit: Number = 20
+const sizeWarningLimit: number = 20
 
 // Recursive function for finding slack channel by name
 export const getChannelFromChannelName = async (channelName: string, cursor: string): Promise<ISlackChannel | undefined> => {
