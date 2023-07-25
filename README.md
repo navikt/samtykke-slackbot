@@ -33,5 +33,5 @@ Testmiljøet til botten lever i `dev-gcp` clusteret på NAIS. NAIS henter Slack 
 
 For å kunne inspisere appen i `dev-gcp` må [naisdevice](https://doc.nais.io/device/?h=nais) være aktivert og du må være medlem av team-researchops. Kontakt i ``#researchops`` eller ``#samtykke-løsning`` på Slack for å få tilgang.
 
-For NAV-ansatte
+## For NAV-ansatte
 Interne henvendelser kan sendes på Slack via kanalene ``#researchops`` eller ``#samtykke-løsning``.
