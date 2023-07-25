@@ -11,8 +11,7 @@ async function boot() {
         await load({ server })
 
         server.listen(config.http.port, () => {
-            console.log(`
-=========  LISTENING ON ${config.http.port}  =========`)
+            console.log(`=========  LISTENING ON ${config.http.port}  =========`)
         })
     } catch (error) {
         console.log('\n\n=========== 💥  TERROR 💥  ============\n\n')
